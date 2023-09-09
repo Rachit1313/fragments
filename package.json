@@ -1,6 +1,6 @@
 {
   "name": "fragments",
-  "private":"true",
+  "private": "true",
   "version": "0.0.1",
   "description": "First repo for CCP555",
   "main": "index.js",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Rachit1313/fragments/issues"
   },
-  "homepage": "https://github.com/Rachit1313/fragments#readme"
+  "homepage": "https://github.com/Rachit1313/fragments#readme",
+  "devDependencies": {
+    "prettier": "3.0.3"
+  }
 }

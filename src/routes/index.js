@@ -2,6 +2,7 @@
 
 const express = require('express');
 const { authenticate } = require('../auth');
+const { createSuccessResponse } = require('../response');
 // version and author from package.json
 const { version, author } = require('../../package.json');
 
@@ -20,14 +21,15 @@ router.use(`/v1`, require('./api'));
 router.get('/', (req, res) => {
   // Client's shouldn't cache this response (always request it fresh)
   res.setHeader('Cache-Control', 'no-cache');
-  // Send a 200 'OK' response
-  res.status(200).json({
-    status: 'ok',
+  // Use createSuccessResponse to format the response
+  const responseData = createSuccessResponse({
     author,
-    // Use your own GitHub URL for this!
     githubUrl: 'https://github.com/Rachit1313/fragments',
     version,
   });
+
+  // Send a 200 'OK' response with the formatted data
+  res.status(200).json(responseData);
 });
 
 module.exports = router;

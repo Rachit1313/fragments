@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../src/app'); // Assuming your Express app is exported in src/app.js
 
 describe('404 Handler', () => {
-  it('should return a 404 status and error message for an unknown route', async () => {
+  test('should return a 404 status and error message for an unknown route', async () => {
     const response = await request(app).get('/nonexistent-route');
 
     expect(response.status).toBe(404);

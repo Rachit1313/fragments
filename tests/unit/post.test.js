@@ -1,5 +1,5 @@
 // tests/unit/get.test.js
-
+const hash = require('../../src/hash');
 const request = require('supertest');
 
 const app = require('../../src/app');
@@ -42,7 +42,7 @@ describe('POST /v1/fragments', () => {
       .send('new fragment');
 
     expect(res.body.fragment.id).toMatch(UUIDFormat);
-    expect(res.body.fragment.ownerId).toMatch('user1@email.com');
+    expect(res.body.fragment.ownerId).toMatch(hash('user1@email.com'));
     expect(res.body.fragment.created && res.body.fragment.updated).toMatch(fragmentDateFormat);
     expect(res.body.fragment.type).toBe('text/plain');
     expect(res.body.fragment.size).toBe(Buffer.byteLength('new fragment'));

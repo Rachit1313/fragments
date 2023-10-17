@@ -58,3 +58,19 @@ jobs:
         # 2. Use `install-ci-test` to do it in a single command, see https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test
         # run: npm install-ci-test
         run: npm install-ci-test
+
+  docker:
+    name: updating docker fragment:latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image
+        run: docker build -t --platform linux/amd64 rachit1313/fragments:latest .
+
+      - name: Push Docker Image to Docker Hub
+        run: docker push rachit1313/fragments:latest

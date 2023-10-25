@@ -58,10 +58,20 @@ describe('POST /v1/fragments', () => {
     expect(res.headers.location).toMatch(`v1/fragments/${res.body.fragment.id}`);
   });
 
-  test('trying to create a fragment with unsupported content', async () => {
+  test('trying to create a fragment with app/json content', async () => {
     const res = await request(app)
       .post('/v1/fragments')
       .set('Content-Type', 'application/json')
+      .auth('user1@email.com', 'password1')
+      .send({ id: '2' });
+
+    expect(res.statusCode).toBe(200);
+  });
+
+  test('trying to create a fragment with unsupported content', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .set('Content-Type', 'image/heloo')
       .auth('user1@email.com', 'password1')
       .send('new fragment');
 

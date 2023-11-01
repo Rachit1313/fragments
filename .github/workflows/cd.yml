@@ -26,9 +26,6 @@ jobs:
     name: AWS
     runs-on: ubuntu-latest
     steps:
-      - name: Clear Git Cache
-        run: git gc --prune=all
-
       - name: Check out code
         uses: actions/checkout@v3
 

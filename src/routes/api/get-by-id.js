@@ -1,20 +1,31 @@
+const path = require('path');
+const md = require('markdown-it')({
+  html: true,
+});
 const logger = require('../../logger');
 const { Fragment } = require('../../model/fragment');
 const { createErrorResponse } = require('../../response');
 
 module.exports = async (req, res) => {
   try {
-    logger.info('request inside get by ID route');
-    const fragment = await Fragment.byId(req.user, req.params.id);
+    const extension = path.extname(req.params.id);
+    logger.debug('extension: ' + extension);
+
+    const fragment = await Fragment.byId(req.user, req.params.id.split('.')[0]);
     const data = await fragment.getData();
-    logger.info('retrieved fragment data');
-    logger.info(fragment);
-    if (!fragment) {
-      res.status(204).json(createErrorResponse(404, 'No fragment found with this id'));
-    }
+    const previousType = fragment.type;
     logger.debug('fragment type : ' + fragment.type);
-    res.set('Content-Type', fragment.type);
-    res.status(200).send(data);
+
+    if ((fragment.type = 'text/markdown' && extension === '.html')) {
+      logger.debug('converting from markdown to html: ');
+      let converted = md.render(data.toString());
+      res.set('Content-Type', 'text/html');
+      res.status(200).send(converted);
+    } else {
+      logger.debug('changing the type to ' + previousType);
+      res.set('Content-Type', previousType);
+      res.status(200).send(data);
+    }
   } catch (err) {
     res.status(404).json(createErrorResponse(404, `Unknown Fragment`));
   }

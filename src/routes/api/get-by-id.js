@@ -13,17 +13,17 @@ module.exports = async (req, res) => {
 
     const fragment = await Fragment.byId(req.user, req.params.id.split('.')[0]);
     const data = await fragment.getData();
-    const previousType = fragment.type;
+    const previousType = fragment.mimeType;
     logger.debug('fragment type : ' + fragment.type);
 
     if ((fragment.type = 'text/markdown' && extension === '.html')) {
       logger.debug('converting from markdown to html: ');
       let converted = md.render(data.toString());
-      res.set('Content-Type', 'text/html');
+      res.setHeader('Content-Type', 'text/html');
       res.status(200).send(converted);
     } else {
       logger.debug('changing the type to ' + previousType);
-      res.set('Content-Type', previousType);
+      res.setHeader('Content-Type', previousType);
       res.status(200).send(data);
     }
   } catch (err) {

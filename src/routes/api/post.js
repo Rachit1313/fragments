@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     res.set('Location', `${apiUrl}/v1/fragments/${fragment.id}`);
     logger.info(`'Location', ${apiUrl}/v1/fragments/${fragment.id}`);
 
-    res.status(200).json(createSuccessResponse({ fragment }));
+    res.status(201).json(createSuccessResponse({ fragment }));
   } catch (error) {
     logger.warn(error.message, 'Error posting fragment');
   }

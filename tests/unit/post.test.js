@@ -30,7 +30,7 @@ describe('POST /v1/fragments', () => {
       .set('Content-Type', 'text/plain')
       .send('test body');
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe('ok');
   });
 
@@ -65,7 +65,7 @@ describe('POST /v1/fragments', () => {
       .auth('user1@email.com', 'password1')
       .send({ id: '2' });
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
   });
 
   test('trying to create a fragment with unsupported content', async () => {

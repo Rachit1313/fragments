@@ -24,7 +24,7 @@ describe('GET /v1/fragments/:id', () => {
       .auth('user1@email.com', 'password1');
     expect(getRes.statusCode).toBe(200);
     expect(getRes.text).toBe('new fragment');
-    expect(getRes.headers['content-type']).toBe('text/plain; charset=utf-8');
+    expect(getRes.headers['content-type']).toBe('text/plain');
   });
 
   test('authenticated users get error if fragment does not exist', async () => {

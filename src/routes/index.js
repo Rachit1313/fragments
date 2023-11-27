@@ -1,5 +1,6 @@
 // src/routes/index.js
 
+const { hostname } = require('os');
 const express = require('express');
 const { authenticate } = require('../auth');
 const { createSuccessResponse } = require('../response');
@@ -26,6 +27,7 @@ router.get('/', (req, res) => {
     author,
     githubUrl: 'https://github.com/Rachit1313/fragments',
     version,
+    hostname: hostname(),
   });
   // Send a 200 'OK' response with the formatted data
   res.status(200).json(responseData);

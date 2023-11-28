@@ -3,7 +3,6 @@
   "containerDefinitions": [
     {
       "name": "fragments",
-      "image": "",
       "cpu": 256,
       "memoryReservation": 512,
       "links": [],
@@ -19,24 +18,12 @@
       "command": [],
       "environment": [
         {
-          "name": "AWS_COGNITO_POOL_ID",
-          "value": ""
-        },
-        {
           "name": "AWS_REGION",
           "value": "us-east-1"
         },
         {
-          "name": "API_URL",
-          "value": "http://localhost:8080"
-        },
-        {
           "name": "PORT",
           "value": "8080"
-        },
-        {
-          "name": "AWS_COGNITO_CLIENT_ID",
-          "value": ""
         }
       ],
       "mountPoints": [],

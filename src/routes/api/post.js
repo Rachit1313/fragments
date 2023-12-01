@@ -13,7 +13,11 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const fragment = new Fragment({ ownerId: owner, type: type });
+    const fragment = new Fragment({
+      ownerId: owner,
+      type: type,
+      size: Buffer.byteLength(req.body),
+    });
     await fragment.save();
     await fragment.setData(req.body);
 

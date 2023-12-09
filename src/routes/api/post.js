@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
     logger.warn(type, 'is not supported');
     res.status(415).json(createErrorResponse(415, 'unsupported type'));
   }
-
   try {
     const fragment = new Fragment({
       ownerId: owner,

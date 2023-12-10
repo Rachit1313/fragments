@@ -40,6 +40,8 @@ const rawBody = () =>
 // You can use Buffer.isBuffer(req.body) to test if it was parsed by the raw body parser.
 try {
   router.post('/fragments', rawBody(), require('./post'));
+
+  router.put('/fragments/:id', rawBody(), require('./update-by-id.js'));
 } catch (error) {
   logger.warn('error entering the post route: ', error.message);
 }

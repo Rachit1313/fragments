@@ -97,6 +97,7 @@ class Fragment {
     if (Buffer.isBuffer(data)) {
       this.updated = new Date().toISOString();
       this.size = Buffer.byteLength(data);
+      await this.save();
       return writeFragmentData(this.ownerId, this.id, data);
     } else {
       throw new Error(`Data is Empty!`);

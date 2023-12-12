@@ -1,6 +1,6 @@
 # Dockerfile with instructions for the docker
 
-FROM node:16.17.0-alpine as build
+FROM node:20.10.0-alpine as build
 
 LABEL maintainer="Rachit Chawla <rachitchawla33@gmail.com>"
 LABEL description="Fragments node.js microservice"
@@ -33,7 +33,7 @@ COPY ./src ./src
 # Copy our HTPASSWD file
 COPY ./tests/.htpasswd ./tests/.htpasswd
 
-FROM node:16.17.0-alpine
+FROM node:20.10.0-alpine
 
 # Setting working directory to app
 WORKDIR /app
